@@ -1,0 +1,82 @@
+:root {
+  --background-color: rgba(250, 248, 248, 0.986);
+  --text-color: #000000;
+
+  --navbar-bg-color:#ffffff; 
+   /* rgb(236, 229, 229); */
+  --navbar-text-color:black;
+
+  --sidebar-bg-color:  rgb(255, 254, 254);
+  --sidebar-text-color:black;
+
+  --button-bg-color: #292727;
+  /* #efeded; */
+  --button-text-color: white;
+  /* #090909; */
+
+  --card-bg-color:white;
+  --card-text-color: #1e1e1e;
+
+  --footer-bg-color: #333;
+  --footer-text-color: white;
+
+  --primary-color: #5198f5;
+  --secondary-color: #837f7f;
+
+  --heading-color: slateblue;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --background-color: #2d2d30;
+  --text-color: #ede5e5;
+
+  --navbar-bg-color: #242425;
+  --navbar-text-color: #ffffff;
+
+  --sidebar-bg-color:   #29292b;
+  --sidebar-text-color: #ffffff;
+
+  --button-bg-color:#333;
+   /* #606063; */
+  --button-text-color: #ffffff;
+
+  --card-bg-color: #383737;
+  --card-text-color: #fdfcfc;
+
+  --footer-bg-color: #333;
+  --footer-text-color: white;
+
+  --primary-color: #5198f5;
+  --secondary-color: #837f7f;
+
+  --heading-color: black;
+   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+
+/* Theme switcher icons */
+.theme-switcher {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.theme-switcher span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.5rem;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.theme-switcher span:hover {
+  transform: scale(1.2);
+}
+

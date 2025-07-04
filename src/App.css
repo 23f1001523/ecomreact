@@ -1,0 +1,154 @@
+@import './assets/css/themes.css';
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App-header {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  color: white;
+  position: relative;
+}
+
+/* Use 3 equal sections */
+.header-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-section.left {
+  justify-content: flex-start;
+}
+
+.header-section.center {
+  justify-content: center;
+}
+
+.header-section.right {
+  justify-content: flex-end;
+}
+
+
+.App-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #61dafb;
+  /* Remove any animation or image-like size */
+}
+
+.App-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.App-footer{
+  background-color:var(--footer-bg-color);
+  color: white;
+  padding: 10px;
+  min-height: 10vh;
+  font-size: calc(10px + 1vmin);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* spacing between cards */
+  /* justify-content: center;  */
+}
+
+.product-card{
+  background-color: var(--card-bg-color);
+  color:var(--card-text-color);
+  padding: 10px 15px;
+  border-radius: 20px;
+  color:black; 
+  height:300px;
+  width:300px;
+  
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); /* updated line */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.card-button{
+  padding: 5px 10px;
+  width: fit-content;
+  background-color: burlywood;  
+  border-radius: 5px;
+  align-self: center;
+  margin-top: 10px;
+  /* border:#61dafb; */
+}
+
+.card-button:hover{
+  background-color: rgb(230, 136, 14);  
+  border-radius: 5px;
+  cursor: pointer;
+  /* border:#61dafb; */
+}
+
+
+/*  Plain Button Style */
+.plain-button {
+  padding: 8px 15px;
+  border: none;
+  /* border-radius: 20px; */
+  border-bottom:solid 1px blue;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+
+.plain-button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.plain-button.active {
+  background-color: burlywood;
+  color: white;
+  font-weight: bold;
+}
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar li:hover {
+  background-color: #eee;
+  font-weight: bold;
+}
