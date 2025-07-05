@@ -4,6 +4,7 @@ const Catalogue = [
     Category: "Electronics",
     Products: [
       {
+        Id:11,
         Name: "Mobile",
         Description: "Latest 5G smartphone with high-resolution display",
         Price: 15000,
@@ -11,6 +12,7 @@ const Catalogue = [
         Rating: 4.5,
       },
       {
+        Id:12,
         Name: "Laptop",
         Description: "High-performance laptop for work and gaming",
         Price: 50000,
@@ -24,6 +26,7 @@ const Catalogue = [
     Category: "Clothing",
     Products: [
       {
+        Id:21,
         Name: "T-Shirt",
         Description: "100% cotton, breathable summer t-shirt",
         Price: 500,
@@ -31,6 +34,7 @@ const Catalogue = [
         Rating: 4.2,
       },
       {
+        Id:22,
         Name: "Jeans",
         Description: "Stylish slim-fit jeans for everyday wear",
         Price: 1500,
@@ -44,6 +48,7 @@ const Catalogue = [
     Category: "Footwear",
     Products: [
       {
+        Id:31,
         Name: "Sneakers",
         Description: "Comfortable sneakers for casual and sports use",
         Price: 3000,
@@ -51,6 +56,7 @@ const Catalogue = [
         Rating: 4.6,
       },
       {
+        Id:32,
         Name: "Sandals",
         Description: "Durable and lightweight sandals",
         Price: 1000,
@@ -64,6 +70,7 @@ const Catalogue = [
     Category: "Home Appliances",
     Products: [
       {
+        Id:41,
         Name: "Washing Machine",
         Description: "Front-load washing machine with smart features",
         Price: 20000,
@@ -71,6 +78,7 @@ const Catalogue = [
         Rating: 4.4,
       },
       {
+        Id:42,
         Name: "Microwave",
         Description: "Compact microwave with grill function",
         Price: 8000,
@@ -84,6 +92,7 @@ const Catalogue = [
     Category: "Books",
     Products: [
       {
+        Id:51,
         Name: "Fiction Novel",
         Description: "Engaging story with plot twists and deep characters",
         Price: 400,
@@ -91,6 +100,7 @@ const Catalogue = [
         Rating: 4.8,
       },
       {
+        Id:52,
         Name: "Science Book",
         Description: "Detailed explanations of modern scientific concepts",
         Price: 600,

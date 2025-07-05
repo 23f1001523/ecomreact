@@ -3,13 +3,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "../assets/css/grid.css";
 
 import Navbar from "./Navbar.jsx";
+import Footer from "./Footer.jsx";
 import HeroSection from "./HeroSection.jsx";
 import Category from "./Category.jsx";
 import Product from "./Product.jsx";
 import MainPage from "./MainPage";
 import InitialCatalogue from "../Catalogue"; // ✅ Make sure the path is correct
 
-function Home() {
+function AdminDashboard() {
+  const user = sessionStorage.getItem("user");
   const [catalogue, setCatalogue] = useState(() => {
     const saved = localStorage.getItem("catalogue");
     return saved ? JSON.parse(saved) : InitialCatalogue;
@@ -97,7 +99,7 @@ function Home() {
       </div>
       <aside className="sidebar">
         <ul>
-          <li onClick={() => setActiveView("home")}>🏠 Home</li>
+          <li onClick={() => setActiveView("dashboard")}>🏠 DashBoard</li>
           <li onClick={() => setActiveView("add-category")}>➕ Add Category</li>
           <li onClick={() => setActiveView("add-product")}>📦 Add Product</li>
           <li onClick={() => setActiveView("products")}>🛍️ View Products</li>
@@ -107,13 +109,12 @@ function Home() {
       </aside>
 
       <main className="main">
-       
-        <HeroSection />
-
-        {activeView === "home" && (
-          <MainPage categories={categories} products={products} />
+         {activeView === "dashboard" && (
+          <div>
+            <h2>Admin DashBoard</h2>
+            <p>Welcome {user}</p>
+          </div>
         )}
-
         {activeView === "add-category" && (
           <div>
             <h2>➕ Add New Category</h2>
@@ -149,9 +150,9 @@ function Home() {
         )}
       </main>
 
-      <footer className="footer">© {new Date().getFullYear()} ApnaCart</footer>
+      <Footer/>
     </div>
   );
 }
 
-export default Home;
+export default AdminDashboard;

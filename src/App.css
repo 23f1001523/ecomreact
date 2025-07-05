@@ -152,3 +152,7 @@
   background-color: #eee;
   font-weight: bold;
 }
+
+.carousel-inner{
+  height: 600px;
+}
