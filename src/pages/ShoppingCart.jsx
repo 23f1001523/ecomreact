@@ -6,16 +6,19 @@ function ShoppingCart() {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
-    }
-  }, []);
+  const savedCart = localStorage.getItem("cart");
+  if (savedCart) {
+    const parsed = JSON.parse(savedCart);
+    console.log("🛒 Loaded cart items:", parsed);
+    setCartItems(parsed);
+  }
+}, []);
+
 
   // Save to localStorage on update
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+  // useEffect(() => {
+  //   localStorage.setItem("cart", JSON.stringify(cartItems));
+  // }, [cartItems]);
 
   const updateQuantity = (id, delta) => {
     setCartItems((prev) =>
@@ -51,11 +54,11 @@ function ShoppingCart() {
               <li
                 key={item.id}
                 className="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <div className="flex-grow-1">
-                  <strong>{item.name}</strong> <br />
-                  <span>${item.price.toFixed(2)} each</span>
-                </div>
+                >
+                  <div className="flex-grow-1">
+                    <strong>{item.name}</strong> <br />
+                    <span>${item.price.toFixed(2)} each</span>
+                  </div>
 
                 {/* Quantity Controls */}
                 <div className="d-flex align-items-center mx-3">

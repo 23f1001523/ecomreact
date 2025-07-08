@@ -6,10 +6,11 @@ import Navbar from "../components/Navbar.jsx";
 import HeroSection from "../components/HeroSection.jsx";
 import Footer from "../components/Footer.jsx";
 
+
 import CategoryDisplay from "../components/CategoryDisplay.jsx";
 import InitialCatalogue from "../Catalogue.js";
 
-function Home() {
+function Home({ cart, setCart }) {
    const [catalogue, setCatalogue] = useState(() => {
     const saved = localStorage.getItem("catalogue");
     return saved ? JSON.parse(saved) : InitialCatalogue;
@@ -35,7 +36,7 @@ function Home() {
     <div className="container-fluid">
       <Navbar />
       <HeroSection />
-      <CategoryDisplay categories={categories}/>
+      <CategoryDisplay categories={categories} />
       <Footer />
     </div>
   );

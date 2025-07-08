@@ -7,10 +7,10 @@ import Login from '../components/Login.jsx';
 import AdminDashboard from '../components/AdminDashboard.jsx';
 import ShoppingCart from '../pages/ShoppingCart.jsx';
 
-const AppRoutes = () => {
+const AppRoutes = ({ cart, setCart }) => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/cart" element={<ShoppingCart />} />
       <Route path="/admindashboard" element={<AdminDashboard />} />
