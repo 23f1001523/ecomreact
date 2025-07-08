@@ -8,7 +8,7 @@ import Footer from "../components/Footer.jsx";
 
 
 import CategoryDisplay from "../components/CategoryDisplay.jsx";
-import InitialCatalogue from "../Catalogue.js";
+import InitialCatalogue from "../database/Catalogue.js";
 
 function Home({ cart, setCart }) {
    const [catalogue, setCatalogue] = useState(() => {

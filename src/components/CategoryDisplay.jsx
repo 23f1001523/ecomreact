@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "../App.css";
-import InitialCatalogue from "../Catalogue";
+import InitialCatalogue from "../database/Catalogue";
 import ProductDisplay from "./ProductDisplay";
 
 function CategoryDisplay() {

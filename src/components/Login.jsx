@@ -18,7 +18,7 @@ function Login() {
 
     if (password === passwords[userType]) {
       alert(`Welcome ${userType.charAt(0).toUpperCase() + userType.slice(1)}!`);
-      sessionStorage.setItem('user',userType);
+      sessionStorage.setItem('user', userType);
       if(userType==='admin'){
           navigate("/admindashboard");
       }else{

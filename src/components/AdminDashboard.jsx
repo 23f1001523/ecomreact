@@ -8,7 +8,7 @@ import HeroSection from "./HeroSection.jsx";
 import Category from "./Category.jsx";
 import Product from "./Product.jsx";
 import MainPage from "./MainPage";
-import InitialCatalogue from "../Catalogue"; // ✅ Make sure the path is correct
+import InitialCatalogue from "../database/Catalogue"; // ✅ Make sure the path is correct
 
 function AdminDashboard() {
   const user = sessionStorage.getItem("user");

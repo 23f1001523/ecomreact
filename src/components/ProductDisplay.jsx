@@ -1,9 +1,52 @@
 import { useState } from "react";
 
-function ProductDisplay({ products = [], cart = [], setCart }) {
+function ProductDisplay({ products = [], cart = [] }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
+  function AddToCart(prod) {
+    const user = sessionStorage.getItem("user");
+    console.log(user);
+    if (!user) {
+      console.error("User not found in sessionStorage.");
+      return;
+    }
+    const cartItem = {
+      id: prod.id,
+      name: prod.Name,
+      description: prod.Description,
+      price: prod.Price,
+      quantity: 1,
+    };
+
+    console.log("cartItem",cartItem);
+
+    const cartStr = localStorage.getItem("cart");
+    let cart;
+    cart={user:user,items:[cartItem]}
+
+    console.log("cart",cart);
+
+    // if (cartStr) {
+    //   try {
+    //     cart = JSON.parse(cartStr);
+    //   } catch (e) {
+    //     console.warn("Invalid cart data. Resetting cart.");
+    //     cart = { user: user, items: [] };
+    //   }
+    // } else {
+    //   cart = { user: user, items: [] };
+    // }
+
+    // const existingItem = cart.items.find((item) => item.id === prod.Id);
+    // if (existingItem) {
+    //   existingItem.quantity += 1;
+    // } else {
+    //   cart.items.push(cartItem);
+    // }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
   const handleAddToCart = (product) => {
     const normalizedProduct = {
       id: String(product.Id),
@@ -26,7 +69,7 @@ function ProductDisplay({ products = [], cart = [], setCart }) {
       newCart.push(normalizedProduct);
     }
 
-    setCart(newCart);
+    // setCart(newCart);
     setModalMessage(`${normalizedProduct.name} added to cart`);
     setModalVisible(true);
     setTimeout(() => setModalVisible(false), 2000);
@@ -35,17 +78,17 @@ function ProductDisplay({ products = [], cart = [], setCart }) {
   const updateQuantity = (id, change) => {
     const newCart = Array.isArray(cart) ? cart : [];
     const updatedCart = newCart
-      .map(item =>
+      .map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + change } : item
       )
-      .filter(item => item.quantity > 0);
-    setCart(updatedCart);
+      .filter((item) => item.quantity > 0);
+    // setCart(updatedCart);
   };
 
   const removeFromCart = (id) => {
     const newCart = Array.isArray(cart) ? cart : [];
-    const updatedCart = newCart.filter(item => item.id !== id);
-    setCart(updatedCart);
+    const updatedCart = newCart.filter((item) => item.id !== id);
+    // setCart(updatedCart);
   };
 
   return (
@@ -78,7 +121,9 @@ function ProductDisplay({ products = [], cart = [], setCart }) {
       <div className="row">
         {products.map((prod, index) => {
           const prodId = String(prod.Id);
-          const inCart = Array.isArray(cart) ? cart.find(item => item.id === prodId) : null;
+          const inCart = Array.isArray(cart)
+            ? cart.find((item) => item.id === prodId)
+            : null;
 
           return (
             <div
@@ -87,7 +132,10 @@ function ProductDisplay({ products = [], cart = [], setCart }) {
             >
               <div className="card shadow-sm h-100 d-flex flex-column w-100">
                 <div className="card-body d-flex flex-column">
-                  <h4 className="card-title text-truncate text-center" title={prod.Name}>
+                  <h4
+                    className="card-title text-truncate text-center"
+                    title={prod.Name}
+                  >
                     {prod.Name}
                   </h4>
                   <p className="card-text text-muted mb-1">
@@ -121,7 +169,7 @@ function ProductDisplay({ products = [], cart = [], setCart }) {
                   ) : (
                     <button
                       className="btn btn-sm btn-warning mt-auto"
-                      onClick={() => handleAddToCart(prod)}
+                      onClick={() => AddToCart(prod)}
                     >
                       Add to Cart
                     </button>
