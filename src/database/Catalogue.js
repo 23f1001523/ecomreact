@@ -1,6 +1,6 @@
 const Catalogue = [
   {
-    id: 1,
+    Id: 1,
     Category: "Electronics",
     Products: [
       {
@@ -22,7 +22,7 @@ const Catalogue = [
     ],
   },
   {
-    id: 2,
+    Id: 2,
     Category: "Clothing",
     Products: [
       {
@@ -44,7 +44,7 @@ const Catalogue = [
     ],
   },
   {
-    id: 3,
+    Id: 3,
     Category: "Footwear",
     Products: [
       {
@@ -66,7 +66,7 @@ const Catalogue = [
     ],
   },
   {
-    id: 4,
+    Id: 4,
     Category: "Home Appliances",
     Products: [
       {
@@ -88,7 +88,7 @@ const Catalogue = [
     ],
   },
   {
-    id: 5,
+    Id: 5,
     Category: "Books",
     Products: [
       {

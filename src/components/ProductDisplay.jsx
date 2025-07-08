@@ -4,92 +4,86 @@ function ProductDisplay({ products = [], cart = [] }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
-  function AddToCart(prod) {
+  function AddToCart(product) {
     const user = sessionStorage.getItem("user");
-    console.log(user);
     if (!user) {
       console.error("User not found in sessionStorage.");
       return;
     }
-    const cartItem = {
-      id: prod.id,
-      name: prod.Name,
-      description: prod.Description,
-      price: prod.Price,
-      quantity: 1,
-    };
 
-    console.log("cartItem",cartItem);
-
-    const cartStr = localStorage.getItem("cart");
-    let cart;
-    cart={user:user,items:[cartItem]}
-
-    console.log("cart",cart);
-
-    // if (cartStr) {
-    //   try {
-    //     cart = JSON.parse(cartStr);
-    //   } catch (e) {
-    //     console.warn("Invalid cart data. Resetting cart.");
-    //     cart = { user: user, items: [] };
-    //   }
-    // } else {
-    //   cart = { user: user, items: [] };
-    // }
-
-    // const existingItem = cart.items.find((item) => item.id === prod.Id);
-    // if (existingItem) {
-    //   existingItem.quantity += 1;
-    // } else {
-    //   cart.items.push(cartItem);
-    // }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-  const handleAddToCart = (product) => {
     const normalizedProduct = {
       id: String(product.Id),
       name: product.Name,
+      description: product.Description,
       price: product.Price,
       quantity: 1,
-      Description: product.Description,
     };
 
-    let newCart = Array.isArray(cart) ? [...cart] : [];
-    const existing = newCart.find((item) => item.id === normalizedProduct.id);
+    let existingCart = { user, items: [] };
 
-    if (existing) {
-      newCart = newCart.map((item) =>
-        item.id === normalizedProduct.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      );
-    } else {
-      newCart.push(normalizedProduct);
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      try {
+        const parsedCart = JSON.parse(storedCart);
+        // Ensure parsedCart has a valid structure
+        existingCart = {
+          user: parsedCart.user || user,
+          items: Array.isArray(parsedCart.items) ? parsedCart.items : [],
+        };
+      } catch {
+        console.warn("Corrupt cart found, resetting.");
+      }
     }
 
-    // setCart(newCart);
+    const itemIndex = existingCart.items.findIndex(
+      (item) => item.id === normalizedProduct.id
+    );
+    if (itemIndex > -1) {
+      existingCart.items[itemIndex].quantity += 1;
+    } else {
+      existingCart.items.push(normalizedProduct);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+
     setModalMessage(`${normalizedProduct.name} added to cart`);
     setModalVisible(true);
     setTimeout(() => setModalVisible(false), 2000);
-  };
+  }
 
   const updateQuantity = (id, change) => {
-    const newCart = Array.isArray(cart) ? cart : [];
-    const updatedCart = newCart
+    const cartData = localStorage.getItem("cart");
+    if (!cartData) return;
+
+    let currentCart = JSON.parse(cartData);
+    currentCart.items = currentCart.items
       .map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + change } : item
       )
       .filter((item) => item.quantity > 0);
-    // setCart(updatedCart);
+
+    localStorage.setItem("cart", JSON.stringify(currentCart));
   };
 
   const removeFromCart = (id) => {
-    const newCart = Array.isArray(cart) ? cart : [];
-    const updatedCart = newCart.filter((item) => item.id !== id);
-    // setCart(updatedCart);
+    const cartData = localStorage.getItem("cart");
+    if (!cartData) return;
+
+    let currentCart = JSON.parse(cartData);
+    currentCart.items = currentCart.items.filter((item) => item.id !== id);
+
+    localStorage.setItem("cart", JSON.stringify(currentCart));
   };
+
+  // Get current cart for rendering
+  const currentCart = (() => {
+    try {
+      const cartData = localStorage.getItem("cart");
+      return cartData ? JSON.parse(cartData).items : [];
+    } catch {
+      return [];
+    }
+  })();
 
   return (
     <div>
@@ -121,9 +115,7 @@ function ProductDisplay({ products = [], cart = [] }) {
       <div className="row">
         {products.map((prod, index) => {
           const prodId = String(prod.Id);
-          const inCart = Array.isArray(cart)
-            ? cart.find((item) => item.id === prodId)
-            : null;
+          const inCart = currentCart.find((item) => item.id === prodId);
 
           return (
             <div

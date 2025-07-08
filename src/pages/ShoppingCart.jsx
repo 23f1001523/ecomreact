@@ -4,25 +4,38 @@ import Navbar from "../components/Navbar";
 function ShoppingCart() {
   const [cartItems, setCartItems] = useState([]);
 
-  // Load from localStorage on mount
+  // Load cart items from localStorage on mount
   useEffect(() => {
-  const savedCart = localStorage.getItem("cart");
-  if (savedCart) {
-    const parsed = JSON.parse(savedCart);
-    console.log("🛒 Loaded cart items:", parsed);
-    setCartItems(parsed);
-  }
-}, []);
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      try {
+        const parsed = JSON.parse(savedCart);
+        console.log("🛒 Loaded cart:", parsed);
+        setCartItems(Array.isArray(parsed.items) ? parsed.items : []);
+      } catch (err) {
+        console.error("❌ Failed to parse cart from localStorage:", err);
+        setCartItems([]);
+      }
+    }
+  }, []);
 
-
-  // Save to localStorage on update
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cartItems));
-  // }, [cartItems]);
+  // Save updated cart items back to localStorage
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      try {
+        const parsed = JSON.parse(savedCart);
+        const updatedCart = { ...parsed, items: cartItems };
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+      } catch (err) {
+        console.error("❌ Failed to update cart in localStorage:", err);
+      }
+    }
+  }, [cartItems]);
 
   const updateQuantity = (id, delta) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
         item.id === id
           ? { ...item, quantity: Math.max(item.quantity + delta, 1) }
           : item
@@ -31,7 +44,7 @@ function ShoppingCart() {
   };
 
   const removeItem = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const total = cartItems.reduce(
@@ -41,9 +54,9 @@ function ShoppingCart() {
 
   return (
     <div>
-           <Navbar />
+      <Navbar />
+
       <div className="container py-4">
-     
         <h2 className="mb-4">Shopping Cart</h2>
 
         {cartItems.length === 0 ? (
@@ -54,11 +67,11 @@ function ShoppingCart() {
               <li
                 key={item.id}
                 className="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div className="flex-grow-1">
-                    <strong>{item.name}</strong> <br />
-                    <span>${item.price.toFixed(2)} each</span>
-                  </div>
+              >
+                <div className="flex-grow-1">
+                  <strong>{item.name}</strong> <br />
+                  <span>₹{item.price.toFixed(2)} each</span>
+                </div>
 
                 {/* Quantity Controls */}
                 <div className="d-flex align-items-center mx-3">
@@ -89,7 +102,7 @@ function ShoppingCart() {
           </ul>
         )}
 
-        <h5>Total: ${total.toFixed(2)}</h5>
+        <h5>Total: ₹{total.toFixed(2)}</h5>
       </div>
     </div>
   );
