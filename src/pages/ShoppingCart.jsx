@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 
 function ShoppingCart() {
   const [cartItems, setCartItems] = useState([]);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   // Load cart items from localStorage on mount
   useEffect(() => {
@@ -17,10 +18,13 @@ function ShoppingCart() {
         setCartItems([]);
       }
     }
+    setHasLoaded(true);
   }, []);
 
-  // Save updated cart items back to localStorage
+  // Save updated cart items to localStorage after loading
   useEffect(() => {
+    if (!hasLoaded) return;
+
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       try {
@@ -31,7 +35,7 @@ function ShoppingCart() {
         console.error("❌ Failed to update cart in localStorage:", err);
       }
     }
-  }, [cartItems]);
+  }, [cartItems, hasLoaded]);
 
   const updateQuantity = (id, delta) => {
     setCartItems((prevItems) =>
@@ -73,7 +77,6 @@ function ShoppingCart() {
                   <span>₹{item.price.toFixed(2)} each</span>
                 </div>
 
-                {/* Quantity Controls */}
                 <div className="d-flex align-items-center mx-3">
                   <button
                     className="btn btn-outline-secondary btn-sm"
@@ -90,7 +93,6 @@ function ShoppingCart() {
                   </button>
                 </div>
 
-                {/* Remove Button */}
                 <button
                   className="btn btn-danger btn-sm"
                   onClick={() => removeItem(item.id)}

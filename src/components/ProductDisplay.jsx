@@ -25,7 +25,6 @@ function ProductDisplay({ products = [], cart = [] }) {
     if (storedCart) {
       try {
         const parsedCart = JSON.parse(storedCart);
-        // Ensure parsedCart has a valid structure
         existingCart = {
           user: parsedCart.user || user,
           items: Array.isArray(parsedCart.items) ? parsedCart.items : [],
@@ -38,9 +37,12 @@ function ProductDisplay({ products = [], cart = [] }) {
     const itemIndex = existingCart.items.findIndex(
       (item) => item.id === normalizedProduct.id
     );
+
     if (itemIndex > -1) {
+      // Item already exists, increase quantity
       existingCart.items[itemIndex].quantity += 1;
     } else {
+      // New item, add to cart
       existingCart.items.push(normalizedProduct);
     }
 
@@ -79,7 +81,8 @@ function ProductDisplay({ products = [], cart = [] }) {
   const currentCart = (() => {
     try {
       const cartData = localStorage.getItem("cart");
-      return cartData ? JSON.parse(cartData).items : [];
+      const parsed = cartData ? JSON.parse(cartData) : null;
+      return parsed && Array.isArray(parsed.items) ? parsed.items : [];
     } catch {
       return [];
     }
