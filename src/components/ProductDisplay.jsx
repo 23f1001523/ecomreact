@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
-function ProductDisplay({ products = [], cart = [] }) {
+function ProductDisplay({ products = [] }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState(""); // "success" or "error"
+  const user = sessionStorage.getItem("user");
 
+  const showModal = (message, type = "success") => {
+    setModalMessage(message);
+    setModalType(type);
+    setModalVisible(true);
+    setTimeout(() => setModalVisible(false), 2000);
+  };
 
   function AddToCart(product) {
-    const user = sessionStorage.getItem("user");
+  
     if (!user) {
-      console.error("User not found in sessionStorage.");
-      setModalMessage(`User not Logged In`);
-      setModalType("error");
-      setModalVisible(true);
-      setTimeout(() => setModalVisible(false), 2000);
+      showModal("User not Logged In", "error");
       return;
     }
 
@@ -53,10 +56,7 @@ function ProductDisplay({ products = [], cart = [] }) {
     }
 
     localStorage.setItem("cart", JSON.stringify(existingCart));
-
-    setModalMessage(`${normalizedProduct.name} added to cart`);
-    setModalVisible(true);
-    setTimeout(() => setModalVisible(false), 2000);
+    showModal(`${normalizedProduct.name} added to cart`, "success");
   }
 
   const updateQuantity = (id, change) => {
@@ -94,15 +94,17 @@ function ProductDisplay({ products = [], cart = [] }) {
     }
   })();
 
+  const getInCart = (id) => currentCart.find((item) => item.id === String(id));
+
   return (
-    <div>
+   <div>
       {modalVisible && (
-        <div className="custom-modal-backdrop">
-          <div className="custom-modal">
-            <div className="custom-modal-header">
-              {modalType === "success" && (
-          <span className="modal-title">Product Added</span>
-        )}
+        <div className={`custom-modal-backdrop`}>
+          <div className={`custom-modal ${modalType}`}>
+            <div className="custom-modal-header d-flex justify-content-between">
+              <span className="modal-title">
+                {modalType === "error" ? "⚠️ Error" : "✅ Success"}
+              </span>
               <button
                 className="modal-close-btn"
                 onClick={() => setModalVisible(false)}
@@ -111,14 +113,6 @@ function ProductDisplay({ products = [], cart = [] }) {
               </button>
             </div>
             <div className="custom-modal-body">{modalMessage}</div>
-            <div className="custom-modal-footer">
-              <button
-                className="btn btn-sm btn-secondary"
-                onClick={() => setModalVisible(false)}
-              >
-                Close
-              </button>
-            </div>
           </div>
         </div>
       )}
@@ -126,7 +120,7 @@ function ProductDisplay({ products = [], cart = [] }) {
       <div className="row">
         {products.map((prod, index) => {
           const prodId = String(prod.Id);
-          const inCart = currentCart.find((item) => item.id === prodId);
+          const inCart = getInCart(prodId);
 
           return (
             <div
@@ -147,7 +141,7 @@ function ProductDisplay({ products = [], cart = [] }) {
                   <p className="card-text mb-1">⭐ {prod.Rating}</p>
                   <p className="card-text small">{prod.Description}</p>
 
-                  {inCart ? (
+                  {user ? (inCart ? (
                     <div className="d-flex align-items-center gap-2 mt-auto">
                       <button
                         className="btn btn-outline-secondary btn-sm"
@@ -176,6 +170,10 @@ function ProductDisplay({ products = [], cart = [] }) {
                     >
                       Add to Cart
                     </button>
+                  )) : (
+                    <p className="text-muted small mt-auto">
+                      Please login to add to cart
+                    </p>
                   )}
                 </div>
               </div>

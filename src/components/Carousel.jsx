@@ -5,17 +5,17 @@ function Carousel() {
     <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src="/assets/images/herosection/image3.jpg" className="d-block w-100" alt="Slide 1" />
+          <img src="/assets/images/herosection/image1.jpg" className="d-block w-100" alt="Slide 1" />
         </div>
         <div className="carousel-item">
             
-          <img src="/assets/images/herosection/image1.jpg" className="d-block w-100" alt="Slide 2" />
+          <img src="/assets/images/herosection/image7.jpg" className="d-block w-100" alt="Slide 2" />
         </div>
         <div className="carousel-item">
-          <img src="/assets/images/herosection/image6.jpg" className="d-block w-100" alt="Slide 3" />
+          <img src="/assets/images/herosection/image3.jpg" className="d-block w-100" alt="Slide 3" />
         </div>
           <div className="carousel-item">
-          <img src="/assets/images/herosection/image7.jpg" className="d-block w-100" alt="Slide 3" />
+          <img src="/assets/images/herosection/image6.jpg" className="d-block w-100" alt="Slide 3" />
         </div>
       </div>
       <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

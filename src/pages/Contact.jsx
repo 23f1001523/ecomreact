@@ -1,8 +1,10 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 
 function Contact() {
   return (
-    <div className="container mt-5 mb-5">
+    <div className="container-fluid mb-5">
+      <Navbar/>
       <h2 className="text-center text-primary mb-4">Contact Us</h2>
       <div className="row justify-content-center">
         <div className="col-md-8">
