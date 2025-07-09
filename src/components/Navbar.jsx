@@ -30,7 +30,7 @@ function Navbar() {
         </button>
 
         <div
-          className="position-absolute top-50 start-50 translate-middle"
+          className="d-flex align-items-center mx-auto"
           style={{ width: "250px", maxWidth: "90vw" }}
         >
           <div className="ms-auto">

@@ -1,12 +1,8 @@
 import React from "react";
-import Carousel from "./Carousel";
 
 function HeroSection() {
  return (
   <div>
-      <div className="mb-2">
-         <Carousel/>
-      </div>
 
      <div className="bg-primary text-white text-center py-5">
       <h1 className="display-4 fw-bold">Biggest Sale of the Season!</h1>

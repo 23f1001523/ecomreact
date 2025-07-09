@@ -3,11 +3,17 @@ import { useState } from "react";
 function ProductDisplay({ products = [], cart = [] }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState(""); // "success" or "error"
+
 
   function AddToCart(product) {
     const user = sessionStorage.getItem("user");
     if (!user) {
       console.error("User not found in sessionStorage.");
+      setModalMessage(`User not Logged In`);
+      setModalType("error");
+      setModalVisible(true);
+      setTimeout(() => setModalVisible(false), 2000);
       return;
     }
 
@@ -94,7 +100,9 @@ function ProductDisplay({ products = [], cart = [] }) {
         <div className="custom-modal-backdrop">
           <div className="custom-modal">
             <div className="custom-modal-header">
-              <span className="modal-title">Product Added</span>
+              {modalType === "success" && (
+          <span className="modal-title">Product Added</span>
+        )}
               <button
                 className="modal-close-btn"
                 onClick={() => setModalVisible(false)}
