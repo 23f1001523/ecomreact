@@ -1,0 +1,25 @@
+.cart-item-card {
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.cart-item-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.quantity-control input {
+  width: 60px;
+}
+
+.summary-card ul {
+  font-size: 0.95rem;
+}
+
+.summary-card .list-group-item {
+  padding: 0.6rem 0;
+  border: none;
+}
+
+.summary-card .list-group-item + .list-group-item {
+  border-top: 1px solid #eee;
+}

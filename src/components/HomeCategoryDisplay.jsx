@@ -6,7 +6,7 @@ function HomeCategoryDisplay({ categories }) {
     <div className="container py-4">
       <div className="row justify-content-center">
         {categories.map((cat, index) => (
-          <div className="col-md-6 mb-4 d-flex" key={index}>
+          <div className="col-md-4 mb-4 d-flex" key={index}>
             <div className="card shadow h-100 w-100">
               <div className="card-header bg-primary text-white">
                 <h4 className="mb-0">{cat.Category}</h4>

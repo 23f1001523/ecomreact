@@ -7,13 +7,10 @@ import Footer from "../components/Footer.jsx";
 import Carousel from "../components/Carousel";
 import HomeCategoryDisplay from "../components/HomeCategoryDisplay.jsx";
 
-
 import InitialDeals from "../database/Deals.js";
 import InitialSuggestions from "../database/Suggestions.js";
 
-function Home({ cart, setCart }) {
-
-
+function Home() {
   const [deals, setDeals] = useState(() => {
     const saved = localStorage.getItem("deals");
     return saved ? JSON.parse(saved) : InitialDeals;
@@ -57,13 +54,21 @@ function Home({ cart, setCart }) {
       {/* <HeroSection /> */}
       <Carousel />
 
-      <div>
-        <h3>Today's Deals (30% OFF)</h3>
+      <div className="p-4 my-4 shadow-sm rounded bg-light mt-3 mb-3">
+        <div className="text-center mb-3">
+          <h2 className="text-primary fw-bold">🔥 Today's Deals</h2>
+          <p className="text-muted">Get 30% OFF on selected products</p>
+          <hr className="w-25 mx-auto border-primary border-2" />
+        </div>
         <HomeCategoryDisplay categories={deals} />
       </div>
 
-      <div>
-        <h3>Suggested For You</h3>
+      <div className="p-4 my-4 shadow-sm rounded bg-white mb-3">
+        <div className="text-center mb-3">
+          <h2 className="text-success fw-bold">🎯 Suggested For You</h2>
+          <p className="text-muted">Handpicked based on your interests</p>
+          <hr className="w-25 mx-auto border-success border-2" />
+        </div>
         <HomeCategoryDisplay categories={suggestions} />
       </div>
 

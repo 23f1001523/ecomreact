@@ -11,7 +11,7 @@ import Carousel from "../components/Carousel";
 import CategoryDisplay from "../components/CategoryDisplay.jsx";
 import InitialCatalogue from "../database/Catalogue.js";
 
-function Shopping({ cart, setCart }) {
+function Shopping() {
    const [catalogue, setCatalogue] = useState(() => {
     const saved = localStorage.getItem("catalogue");
     return saved ? JSON.parse(saved) : InitialCatalogue;
