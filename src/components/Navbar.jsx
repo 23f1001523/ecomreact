@@ -43,7 +43,7 @@ function Navbar() {
               />
               <span classname="input-group-text">
                 <button className="btn btn-primary">
-                  <i class="bi bi-search"></i>
+                  <i className="bi bi-search"></i>
                 </button>
               </span>
             </div>
@@ -53,22 +53,22 @@ function Navbar() {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item mx-2">
               <Link className="nav-link" to="/">
-                <i class="bi bi-house"></i> Home
+                <i className="bi bi-house"></i> Home
               </Link>
             </li>
             <li className="nav-item mx-2">
               <Link className="nav-link" to="/shop">
-                <i class="bi bi-bag"></i> Shop
+                <i className="bi bi-bag"></i> Shop
               </Link>
             </li>
             <li className="nav-item mx-2">
               <Link className="nav-link" to="/cart">
-                <i class="bi bi-cart4"></i> Cart
+                <i className="bi bi-cart4"></i> Cart
               </Link>
             </li>
             <li className="nav-item mx-2">
               <Link className="nav-link" to="/contact">
-                <i class="bi bi-telephone"></i> Contact
+                <i className="bi bi-telephone"></i> Contact
               </Link>
             </li>
             {!user ? (

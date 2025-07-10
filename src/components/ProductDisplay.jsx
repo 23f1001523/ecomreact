@@ -99,12 +99,22 @@ function ProductDisplay({ products = [] }) {
   return (
    <div>
       {modalVisible && (
+<<<<<<< Updated upstream
         <div className={`custom-modal-backdrop`}>
           <div className={`custom-modal ${modalType}`}>
             <div className="custom-modal-header d-flex justify-content-between">
               <span className="modal-title">
                 {modalType === "error" ? "⚠️ Error" : "✅ Success"}
               </span>
+=======
+        <div className="custom-modal-backdrop">
+          <div className="custom-modal">
+            <div className="custom-modal-header">
+              {modalType === "success" && (
+          <span className="modal-title">Product Added</span>
+          
+        )}
+>>>>>>> Stashed changes
               <button
                 className="modal-close-btn"
                 onClick={() => setModalVisible(false)}
